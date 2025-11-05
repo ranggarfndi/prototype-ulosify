@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - ULOSIFY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <nav class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+            <a href="index.html" class="text-3xl font-extrabold text-indigo-600">ULOSIFY</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Beranda</a>
+                <a href="pasar.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Pasar Ulos</a>
+                <a href="peta.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Peta Penenun</a>
+                <a href="login.html" class="bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">Masuk</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Beranda</a>
+            <a href="pasar.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Pasar Ulos</a>
+            <a href="peta.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Peta Penenun</a>
+            <a href="login.html" class="block bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full mt-2 text-center">Masuk</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 max-w-7xl mx-auto">
+        <div class="min-h-[calc(100vh-80px)] flex items-center justify-center py-16">
+            <div class="bg-white p-10 sm:p-12 rounded-3xl shadow-2xl w-full max-w-lg">
+                <a href="index.html" class="text-3xl font-extrabold text-indigo-600 block text-center mb-2">ULOSIFY</a>
+                <h1 class="text-3xl font-bold text-slate-900 mb-2 text-center">Masuk ke Akun Anda</h1>
+                <p class="text-slate-500 mb-8 text-center">Masuk sebagai Penenun atau Pelanggan.</p>
+                
+                <form action="index.html" method="POST">
+                    <div class="mb-5">
+                        <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                        <input type="email" id="email" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" placeholder="nama@email.com">
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">Kata Sandi</label>
+                        <input type="password" id="password" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-4 px-4 rounded-full text-lg hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Masuk
+                    </button>
+                    <p class="text-sm text-slate-600 mt-6 text-center">
+                        Belum punya akun? <a href="#" class="font-semibold text-indigo-600 hover:underline">Daftar sebagai Penenun</a>
+                    </p>
+                    <p class="text-sm text-slate-600 mt-2 text-center">
+                        atau <a href="#" class="font-semibold text-indigo-600 hover:underline">Daftar sebagai Pelanggan</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Hasil Pindaian: Ulos Ragidup - ULOSIFY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <nav class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-extrabold text-indigo-600">ULOSIFY</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Beranda</a>
+                <a href="pasar.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Pasar Ulos</a>
+                <a href="peta.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Peta Penenun</a>
+                <a href="login.html" class="bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">Masuk</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Beranda</a>
+            <a href="pasar.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Pasar Ulos</a>
+            <a href="peta.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Peta Penenun</a>
+            <a href="login.html" class="block bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full mt-2 text-center">Masuk</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 pt-12 pb-24">
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl overflow-hidden">
+            <div class="grid lg:grid-cols-2 gap-10 md:gap-16">
+                
+                <div>
+                    <img src="assets/ulos-ragidup.jpg" alt="Ulos Ragidup" class="w-full h-auto rounded-3xl shadow-lg object-cover aspect-square">
+                </div>
+                
+                <div class="flex flex-col justify-center">
+                    <p class="text-indigo-600 font-semibold mb-2">Hasil Pindaian (95% Akurat)</p>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">Ulos Ragidup</h1>
+                    <p class="text-lg text-slate-600 mb-8">
+                        Ulos Ragidup melambangkan kehidupan dan doa restu untuk kebahagiaan. Ini adalah salah satu Ulos paling sakral dalam adat Batak Toba.
+                    </p>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Pustaka Adat</h3>
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                            <h4 class="font-semibold text-slate-700 text-lg mb-2">Makna Filosofis:</h4>
+                            <p class="text-slate-600 mb-4">Melambangkan kehidupan abadi ("Ragidup" = Hidup yang Berpola) dan doa untuk umur panjang, keturunan, dan kekayaan.</p>
+                            <h4 class="font-semibold text-slate-700 text-lg mb-2">Tata Cara Penggunaan Adat:</h4>
+                            <p class="text-slate-600">Diberikan oleh orang tua kepada anak yang menikah (mangulosi), atau sebagai Ulos penutup jenazah bagi orang tua yang meninggal dalam status terhormat.</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Temukan di Pasar Ulos</h3>
+                        <a href="produk.html" class="flex flex-col sm:flex-row items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 shadow-md hover:shadow-lg hover:border-indigo-300 transition-all duration-300 group">
+                            <img src="assets/ulos-ragidup.jpg" alt="Produk Ulos Ragidup" class="w-24 h-24 rounded-xl object-cover flex-shrink-0">
+                            <div class="flex-1 text-center sm:text-left">
+                                <h4 class="font-bold text-xl text-slate-800 group-hover:text-indigo-600">Ulos Ragidup (Tenun Tangan)</h4>
+                                <p class="text-slate-500 mb-1">Oleh: Sanggar Partonun Sinta</p>
+                                <p class="text-indigo-600 font-bold text-lg">Rp 2.500.000</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-slate-900 text-slate-300 pt-16 pb-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 ULOSIFY. Dibuat untuk Kompetisi Inovasi Digital Budaya GO!</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+    </script>
+
+</body>
+</html>
