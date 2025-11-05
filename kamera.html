@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memindai... - ULOSIFY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<!-- 
+  Kita buat body-nya mengisi seluruh layar (h-screen)
+  dan menggunakan flex-col untuk menempatkan navbar di atas dan
+  konten kamera (main) mengisi sisa ruang.
+-->
+<body class="bg-slate-900 flex flex-col h-screen">
+
+    <!-- Navbar (Tetap konsisten) -->
+    <nav class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-extrabold text-indigo-600">ULOSIFY</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Beranda</a>
+                <a href="pasar.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Pasar Ulos</a>
+                <a href="peta.html" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-300">Peta Penenun</a>
+                <a href="login.html" class="bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">Masuk</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Beranda</a>
+            <a href="pasar.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Pasar Ulos</a>
+            <a href="peta.html" class="block font-medium text-slate-600 hover:text-indigo-600 py-2">Peta Penenun</a>
+            <a href="login.html" class="block bg-indigo-600 text-white font-semibold px-6 py-2 rounded-full mt-2 text-center">Masuk</a>
+        </div>
+    </nav>
+
+    <!-- 
+      Konten Kamera (Main)
+      flex-1 akan membuatnya mengisi sisa ruang.
+      relative + overflow-hidden untuk menampung UI overlay.
+      bg-black untuk simulasi viewfinder kamera.
+    -->
+    <main class="flex-1 relative bg-black overflow-hidden">
+        
+        <!-- 
+          PERUBAHAN: Elemen <video> ditambahkan untuk menampilkan feed kamera.
+          Elemen ini akan mengisi seluruh area 'main'.
+        -->
+        <video id="camera-view" autoplay playsinline muted class="absolute top-0 left-0 w-full h-full object-cover"></video>
+
+        <!-- UI Overlay: Teks Instruksi -->
+        <div class="absolute top-8 left-1/2 -translate-x-1/2 z-10 bg-black/30 text-white/90 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+            Arahkan kamera ke motif Ulos
+        </div>
+
+        <!-- UI Overlay: Bingkai Target Pindai -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-3/4 max-w-sm aspect-square">
+            <!-- Animasi pemindaian (garis) - opsional tapi keren -->
+            <div class="absolute top-0 h-1 w-full bg-indigo-400 rounded-full animate-pulse"></div>
+
+            <!-- Sudut-sudut bingkai -->
+            <div class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-white/80 rounded-tl-lg"></div>
+            <div class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-white/80 rounded-tr-lg"></div>
+            <div class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-white/80 rounded-bl-lg"></div>
+            <div class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-white/80 rounded-br-lg"></div>
+        </div>
+        
+        <!-- 
+          UI Overlay: Bar Kontrol Bawah
+          Ini adalah tempat tombol shutter
+        -->
+        <div class="absolute bottom-0 left-0 w-full z-10 p-8 bg-gradient-to-t from-black/60 to-transparent">
+            <div class="flex justify-center items-center">
+                
+                <!-- 
+                  Tombol Shutter (Tombol Ambil Foto)
+                  Ini adalah tautan (link) yang disamarkan jadi tombol.
+                  Mengarahkan ke hasil-scan.html
+                  
+                  (Untuk prototipe, ini sudah cukup. Untuk aplikasi nyata,
+                  tombol ini akan mengambil gambar dari <video>.)
+                -->
+                <a href="hasil-scan.html" class="block w-20 h-20 rounded-full bg-white shadow-2xl transition-all duration-300 transform active:scale-90 hover:opacity-90">
+                    <!-- Lingkaran dalam untuk estetika -->
+                    <span class="block w-full h-full rounded-full border-[6px] border-white/50 ring-4 ring-offset-2 ring-offset-transparent ring-white"></span>
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- Script untuk Mobile Menu -->
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+
+        // --- PERUBAHAN: Script untuk mengaktifkan kamera ---
+        
+        const videoElement = document.getElementById('camera-view');
+
+        // Periksa apakah browser mendukung API
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            
+            // Minta akses ke kamera
+            // 'facingMode: "environment"' akan mencoba meminta kamera belakang (di HP)
+            navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'environment' 
+                } 
+            })
+            .then(function(stream) {
+                // Jika berhasil, tampilkan stream di elemen <video>
+                videoElement.srcObject = stream;
+                videoElement.play();
+            })
+            .catch(function(err) {
+                console.error("Kamera belakang tidak dapat diakses:", err);
+                
+                // Fallback: Jika kamera belakang gagal (misal di laptop),
+                // coba minta kamera apa saja (biasanya kamera depan)
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        videoElement.srcObject = stream;
+                        videoElement.play();
+                    })
+                    .catch(function(err) {
+                        console.error("Semua kamera gagal diakses:", err);
+                        alert("Tidak bisa mengakses kamera. Pastikan Anda memberi izin.");
+                    });
+            });
+        } else {
+            console.error("getUserMedia tidak didukung di browser ini.");
+            alert("Browser Anda tidak mendukung akses kamera.");
+        }
+        // --- Akhir dari Script Kamera ---
+    </script>
+
+</body>
+</html>
