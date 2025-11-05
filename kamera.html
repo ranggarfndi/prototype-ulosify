@@ -11,11 +11,10 @@
     </style>
 </head>
 <!-- 
-  Kita buat body-nya mengisi seluruh layar (h-screen)
-  dan menggunakan flex-col untuk menempatkan navbar di atas dan
-  konten kamera (main) mengisi sisa ruang.
+  PERUBAHAN: Body tidak lagi bg-slate-900.
+  Kita gunakan flex flex-col h-screen untuk struktur.
 -->
-<body class="bg-slate-900 flex flex-col h-screen">
+<body class="bg-slate-100 flex flex-col h-screen">
 
     <!-- Navbar (Tetap konsisten) -->
     <nav class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-sm">
@@ -40,58 +39,91 @@
     </nav>
 
     <!-- 
-      Konten Kamera (Main)
-      flex-1 akan membuatnya mengisi sisa ruang.
-      relative + overflow-hidden untuk menampung UI overlay.
-      bg-black untuk simulasi viewfinder kamera.
+      PERUBAHAN: Konten Kamera (Main)
+      - Dibuat flex-1 untuk mengisi sisa layar.
+      - 'items-center justify-center' untuk memusatkan bingkai di desktop.
+      - 'bg-slate-100' sebagai latar belakang halaman.
     -->
-    <main class="flex-1 relative bg-black overflow-hidden">
+    <main class="flex-1 flex items-center justify-center py-8 md:py-12">
         
         <!-- 
-          PERUBAHAN: Elemen <video> ditambahkan untuk menampilkan feed kamera.
-          Elemen ini akan mengisi seluruh area 'main'.
+          PERUBAHAN: Bingkai Kontainer Kamera
+          - Di mobile (default): w-full h-full (mengisi 'main').
+          - Di tablet/desktop (md:): Dibatasi ukurannya (misal: w-[400px] h-[800px]),
+            diberi rounded-3xl dan shadow-2xl untuk simulasi perangkat.
         -->
-        <video id="camera-view" autoplay playsinline muted class="absolute top-0 left-0 w-full h-full object-cover"></video>
-
-        <!-- UI Overlay: Teks Instruksi -->
-        <div class="absolute top-8 left-1/2 -translate-x-1/2 z-10 bg-black/30 text-white/90 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-            Arahkan kamera ke motif Ulos
-        </div>
-
-        <!-- UI Overlay: Bingkai Target Pindai -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-3/4 max-w-sm aspect-square">
-            <!-- Animasi pemindaian (garis) - opsional tapi keren -->
-            <div class="absolute top-0 h-1 w-full bg-indigo-400 rounded-full animate-pulse"></div>
-
-            <!-- Sudut-sudut bingkai -->
-            <div class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-white/80 rounded-tl-lg"></div>
-            <div class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-white/80 rounded-tr-lg"></div>
-            <div class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-white/80 rounded-bl-lg"></div>
-            <div class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-white/80 rounded-br-lg"></div>
-        </div>
+        <div class="relative w-full h-full md:w-[400px] md:h-[800px] md:max-h-[80vh] md:rounded-3xl md:shadow-2xl overflow-hidden bg-black">
         
-        <!-- 
-          UI Overlay: Bar Kontrol Bawah
-          Ini adalah tempat tombol shutter
-        -->
-        <div class="absolute bottom-0 left-0 w-full z-10 p-8 bg-gradient-to-t from-black/60 to-transparent">
-            <div class="flex justify-center items-center">
-                
-                <!-- 
-                  Tombol Shutter (Tombol Ambil Foto)
-                  Ini adalah tautan (link) yang disamarkan jadi tombol.
-                  Mengarahkan ke hasil-scan.html
-                  
-                  (Untuk prototipe, ini sudah cukup. Untuk aplikasi nyata,
-                  tombol ini akan mengambil gambar dari <video>.)
-                -->
-                <a href="hasil-scan.html" class="block w-20 h-20 rounded-full bg-white shadow-2xl transition-all duration-300 transform active:scale-90 hover:opacity-90">
-                    <!-- Lingkaran dalam untuk estetika -->
-                    <span class="block w-full h-full rounded-full border-[6px] border-white/50 ring-4 ring-offset-2 ring-offset-transparent ring-white"></span>
+            <!-- 
+              Elemen <video> untuk feed kamera.
+              Posisinya absolut untuk mengisi bingkai kontainer di atas.
+            -->
+            <video id="camera-view" autoplay playsinline muted class="absolute top-0 left-0 w-full h-full object-cover"></video>
+
+            <!-- 
+              PERUBAHAN: Bilah Kontrol Atas (Baru)
+              - Tampilan 'frosted glass'
+            -->
+            <div class="absolute top-0 left-0 w-full z-10 p-5 flex justify-between items-center bg-gradient-to-b from-black/50 to-transparent">
+                <!-- Ikon Flash (Palsu) -->
+                <button class="text-white/80 hover:text-white transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </button>
+                <!-- Tombol Tutup (Kembali ke scan.html) -->
+                <a href="scan.html" class="text-white/80 hover:text-white transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </a>
-
             </div>
-        </div>
+
+            <!-- 
+              PERUBAHAN: Bingkai Target Pindai (Reticle)
+              - Mengganti 4 sudut dengan reticle bulat yang lebih halus.
+            -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-3/4 max-w-sm aspect-square">
+                <!-- Reticle luar dengan animasi pulse -->
+                <div class="w-full h-full rounded-full border-2 border-white/40 animate-pulse"></div>
+                <!-- Reticle dalam yang solid -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full border border-white/80"></div>
+                <!-- Titik tengah -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white/80 rounded-full"></div>
+            </div>
+            
+            <!-- 
+              PERUBAHAN: Bilah Kontrol Bawah
+              - Tampilan 'frosted glass'
+              - Penambahan ikon galeri & balik kamera
+            -->
+            <div class="absolute bottom-0 left-0 w-full z-10 p-6 md:p-8 bg-gradient-to-t from-black/50 to-transparent backdrop-blur-sm">
+                <div class="flex justify-between items-center">
+                    
+                    <!-- Ikon Galeri (Palsu) -->
+                    <button class="text-white/80 hover:text-white transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </button>
+
+                    <!-- Tombol Shutter (Asli, link ke hasil-scan.html) -->
+                    <a href="hasil-scan.html" class="block w-20 h-20 rounded-full bg-white shadow-2xl transition-all duration-300 transform active:scale-90 hover:opacity-90">
+                        <span class="block w-full h-full rounded-full border-[6px] border-white/50 ring-4 ring-offset-2 ring-offset-transparent ring-white"></span>
+                    </a>
+                    
+                    <!-- Ikon Balik Kamera (Palsu) - PERUBAHAN DI SINI -->
+                    <button class="text-white/80 hover:text-white transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <!-- Path SVG diganti dengan ikon 'switch-horizontal' yang lebih bersih -->
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m-4 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                    </button>
+
+                </div>
+            </div>
+
+        </div> <!-- Akhir dari Bingkai Kontainer Kamera -->
 
     </main>
     
@@ -101,30 +133,22 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         };
 
-        // --- PERUBAHAN: Script untuk mengaktifkan kamera ---
+        // --- Script untuk mengaktifkan kamera (Tidak berubah) ---
         
         const videoElement = document.getElementById('camera-view');
 
-        // Periksa apakah browser mendukung API
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            
-            // Minta akses ke kamera
-            // 'facingMode: "environment"' akan mencoba meminta kamera belakang (di HP)
             navigator.mediaDevices.getUserMedia({ 
                 video: { 
                     facingMode: 'environment' 
                 } 
             })
             .then(function(stream) {
-                // Jika berhasil, tampilkan stream di elemen <video>
                 videoElement.srcObject = stream;
                 videoElement.play();
             })
             .catch(function(err) {
                 console.error("Kamera belakang tidak dapat diakses:", err);
-                
-                // Fallback: Jika kamera belakang gagal (misal di laptop),
-                // coba minta kamera apa saja (biasanya kamera depan)
                 navigator.mediaDevices.getUserMedia({ video: true })
                     .then(function(stream) {
                         videoElement.srcObject = stream;
